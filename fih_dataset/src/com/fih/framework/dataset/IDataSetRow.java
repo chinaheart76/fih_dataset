@@ -23,26 +23,26 @@ import java.util.List;
  * <br><br> 
  * 数据行接口
  */
-public interface IDataSetRow extends Serializable {
+public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	
 	/**
 	 * 获得数据行中的一个数据项
 	 * @param columnName	列名
 	 * @return
 	 */
-	IDataSetData get(String columnName);
+	IDataSetDataItem get(String columnName);
 	/**
 	 * 获得数据行中的一个数据项
 	 * @param columnNo	列序号
 	 * @return
 	 */
-	IDataSetData get(int columnNo);
+	IDataSetDataItem get(int columnNo);
 	
 	/**
 	 * 返回数据行中的全部数据项
 	 * @return	数据项集合
 	 */
-	List<IDataSetData> getColumns();
+	List<IDataSetDataItem> getColumns();
 	
 	/**
 	 * 数据行的数据项数量
@@ -67,8 +67,8 @@ public interface IDataSetRow extends Serializable {
 	 * @param columnName
 	 * @param data
 	 */
-	void set(String columnName,IDataSetData data);
-	void set(int columnNo,IDataSetData data);
+	void set(String columnName,IDataSetDataItem data);
+	void set(int columnNo,IDataSetDataItem data);
 
 }
 

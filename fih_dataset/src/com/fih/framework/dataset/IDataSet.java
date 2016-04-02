@@ -13,7 +13,7 @@ import java.util.List;
  *
  */
 
-public interface IDataSet extends Serializable {
+public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	
 	/**
 	 * 数据集名
@@ -65,8 +65,8 @@ public interface IDataSet extends Serializable {
 	 * @param col
 	 * @return
 	 */
-	IDataSetData get(int row,int col);
-	IDataSetData get(int row,String colName);
+	IDataSetDataItem get(int row,int col);
+	IDataSetDataItem get(int row,String colName);
 	
 	/**
 	 * 修改数据集数据项
@@ -74,8 +74,8 @@ public interface IDataSet extends Serializable {
 	 * @param col
 	 * @param data
 	 */
-	void set(int row,int col,IDataSetData data);
-	void set(int row,String colName,IDataSetData data);
+	void set(int row,int col,IDataSetDataItem data);
+	void set(int row,String colName,IDataSetDataItem data);
 	
 	/**
 	 * 添加数据行

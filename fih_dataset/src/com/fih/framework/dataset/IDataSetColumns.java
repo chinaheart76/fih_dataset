@@ -13,20 +13,20 @@ import java.util.List;
  *数据集的数据列接口
  */
 
-public interface IDataSetColumns extends Serializable {
+public interface IDataSetColumns extends Serializable,Iterable<IDataSetDataItem> {
 	
 	/**
 	 * 获得第几行数据项
 	 * @param row
 	 * @return
 	 */
-	IDataSetData get(int row);
+	IDataSetDataItem get(int row);
 	/**
 	 * 修改第几行数据项
 	 * @param row
 	 * @param data
 	 */
-	void set(int row,IDataSetData data);
+	void set(int row,IDataSetDataItem data);
 	
 	/**
 	 * 数据列行数
@@ -38,14 +38,14 @@ public interface IDataSetColumns extends Serializable {
 	 * 获得数据列中全部数据项
 	 * @return
 	 */
-	List<IDataSetData> getAllRows();
+	List<IDataSetDataItem> getAllRows();
 	/**
 	 * 获得数据列中部分数据项
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	List<IDataSetData> getRows(int start,int end);
+	List<IDataSetDataItem> getRows(int start,int end);
 	
 
 }
