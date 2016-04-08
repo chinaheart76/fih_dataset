@@ -29,6 +29,16 @@ public class testNullDataItem {
 		NullDataItem nullDataItem3 = (NullDataItem) nullDataItem1.get();
 		IDataSetDataItem<Object> nullDataItem4 = nullDataItem1.get();
 		Object value1 = nullDataItem1.getValue();
+		if(null == value1){
+			System.out.println("空值");
+		}
+		if(nullDataItem1.equals(nullDataItem3)){
+			System.out.println("相等");
+		}
+		
+		if(nullDataItem1.compareTo(nullDataItem4) == 0){
+			System.out.println("相等");
+		}
 
 	}
 

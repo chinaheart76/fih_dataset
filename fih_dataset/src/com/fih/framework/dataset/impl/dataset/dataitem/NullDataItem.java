@@ -53,6 +53,10 @@ public class NullDataItem extends AbstractDataItem<Object> {
 
 	@Override
 	public int compareTo(IDataSetDataItem<Object> o) {
+		if(o.getType() == DataItemType.NULL){
+			return 0;
+		}
+		
 		return -1;
 	}
 
