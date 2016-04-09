@@ -25,7 +25,14 @@ import java.util.List;
  */
 public interface IPropertySet extends Serializable {
 
-	Property getProperty(String paramString);
+	Property getProperty(String propertyName);
+	
+	void addProperty(Property property);
+	void addProperty(String name,String value);
+	
+	Property removeProperty(String name);
+	
+	void clear();
 
 	List<Property> getProperties();
 }

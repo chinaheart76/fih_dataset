@@ -47,6 +47,14 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	IDataSetColumns getColumn(String colName);
 	
 	/**
+	 * 数据集多个数据列
+	 * @param col
+	 * @return
+	 */
+	IDataSetColumns getColumn(int[] col);
+	IDataSetColumns getColumn(String[] colName);
+
+	/**
 	 * 数据集列数
 	 * @return
 	 */
@@ -99,6 +107,8 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 */
 	void merge(IDataSet[] datasets);
 	void merge(IDataSet datasetSource,IDataSet datasetDest);
+	
+	void accept(IDataSetVisitor visitor);
 	
 }
 
