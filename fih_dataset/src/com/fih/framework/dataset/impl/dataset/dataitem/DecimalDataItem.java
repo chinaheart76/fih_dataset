@@ -186,6 +186,8 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 
 	@Override
 	public boolean equals(Object obj) {
+		if(obj == this)
+			return true;
 		if(obj instanceof DecimalDataItem)
 			return ((DecimalDataItem)obj).doubleValue() == this.value;
 		return false;

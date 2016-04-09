@@ -1,5 +1,7 @@
 package com.fih.framework.dataset.impl.dataset.dataitem;
 
+import java.util.Arrays;
+
 import com.fih.framework.dataset.DataItemType;
 import com.fih.framework.dataset.IDataSetDataItem;
 
@@ -20,46 +22,52 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 
 	public BinaryDataItem(byte[] value) {
 		super();
-		this.value = value;
+		this.setValue(value);
 	}
 
 	@Override
 	public DataItemType getType() {
 		return DataItemType.BYTES;
 	}
-
-	@Override
-	public byte[] getValue() {
+	
+	public byte[] getOriginValue(){
 		return this.value;
 	}
 
 	@Override
+	public byte[] getValue() {
+		byte[] newValue = new byte[this.value.length];
+		System.arraycopy(this.value, 0, newValue, 0, this.value.length);
+		return newValue;
+	}
+
+	@Override
 	public void setValue(byte[] data) {
-//		this.value = data;
 		System.arraycopy(data, 0, this.value, 0, data.length);
 	}
 
 	@Override
-	public void set(IDataSetDataItem data) {
-		// TODO Auto-generated method stub
-
+	public void set(IDataSetDataItem<byte[]> data) {
+		this.setValue(data.getValue());
 	}
 
-//	@Override
+	public void set(BinaryDataItem data) {
+		this.setValue(data.getOriginValue());
+	}
+
 	public int compareTo(byte[] o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(Arrays.equals(this.value, o))
+			return 0;
+		return 1;
 	}
 
 	@Override
 	public int compareTo(IDataSetDataItem<byte[]> o) {
-	// TODO Auto-generated method stub
-	return 0;
+		return compareTo(o.getValue());
 	}
 
 	public int compareTo(BinaryDataItem o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return compareTo(o.getOriginValue());
 	}
 
 	@Override
@@ -69,8 +77,10 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 
 	@Override
 	public boolean equals(Object obj) {
+		if(obj == this)
+			return true;
 		if ((obj instanceof BinaryDataItem))
-	      return ((BinaryDataItem)obj).equals(this.value);
+	      return Arrays.equals(((BinaryDataItem)obj).getOriginValue(),this.value);
 	    return false;
 	}
 

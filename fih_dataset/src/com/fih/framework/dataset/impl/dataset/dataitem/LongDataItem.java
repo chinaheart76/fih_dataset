@@ -146,6 +146,8 @@ public class LongDataItem extends AbstractDataItem<Long> {
 
 	@Override
 	public boolean equals(Object obj) {
+		if(obj == this)
+			return true;
 		if(obj instanceof LongDataItem)
 			return ((LongDataItem)obj).longValue() == this.value;
 		if(obj instanceof IntegerDataItem)

@@ -58,5 +58,17 @@ public interface IDataSetDataItem<T> extends Serializable,Comparable<IDataSetDat
 	 */
 	void set(IDataSetDataItem<T> data);
 	
+	/**
+	 * 数据项值访问
+	 * @param visitor
+	 */
+	void accept(IDataSetDataItemValueVisitor<T> visitor);
+	
+	/**
+	 * 数据项访问
+	 * @param visitor
+	 */
+	void accept(IDataSetDataItemVisitor<T> visitor);
+	
 }
 
