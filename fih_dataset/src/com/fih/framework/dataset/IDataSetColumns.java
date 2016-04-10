@@ -26,7 +26,7 @@ public interface IDataSetColumns extends Serializable,Iterable<IDataSetDataItem>
 	 * @param row
 	 * @param data
 	 */
-	void set(int row,IDataSetDataItem data);
+	IDataSetDataItem set(int row,IDataSetDataItem data);
 	
 	/**
 	 * 数据列行数
@@ -46,6 +46,7 @@ public interface IDataSetColumns extends Serializable,Iterable<IDataSetDataItem>
 	 * @return
 	 */
 	List<IDataSetDataItem> getRows(int start,int end);
+	List<IDataSetDataItem> getRows(int[] rows);
 	
 
 }

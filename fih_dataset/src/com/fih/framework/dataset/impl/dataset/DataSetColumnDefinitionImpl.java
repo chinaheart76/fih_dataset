@@ -1,94 +1,67 @@
 package com.fih.framework.dataset.impl.dataset;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fih.framework.dataset.IDataSetColumnDefinition;
 import com.fih.framework.dataset.Property;
 
-public class DataSetColumnDefinitionImpl implements IDataSetColumnDefinition {
+public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSetColumnDefinition {
 
-	@Override
-	public Property getProperty(String propertyName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addProperty(Property property) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void addProperty(String name, String value) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Property removeProperty(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Property> getProperties() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	private static final long serialVersionUID = -7347907416598531427L;
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getPropertyValue("name");
 	}
 
 	@Override
 	public String getAlias() {
-		// TODO Auto-generated method stub
-		return null;
+		return getPropertyValue("alias");
 	}
 
 	@Override
 	public String getCaption() {
-		// TODO Auto-generated method stub
-		return null;
+		return getPropertyValue("caption");
 	}
 
 	@Override
 	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
+		String value = getPropertyValue("type");
+		if("".equals(value))
+			return 1;
+		return Integer.valueOf(value);
 	}
 
 	@Override
 	public int getPrivateType() {
-		// TODO Auto-generated method stub
-		return 0;
+		String value = getPropertyValue("privateType");
+		if("".equals(value))
+			return 1;
+		return Integer.valueOf(value);
 	}
 
 	@Override
 	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		String value = getPropertyValue("length");
+		if("".equals(value))
+			return 0;
+		return Integer.valueOf(value);
 	}
 
 	@Override
 	public String getTableName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getPropertyValue("tableName");
 	}
 
 	@Override
 	public String getTableAlias() {
-		// TODO Auto-generated method stub
-		return null;
+		return getPropertyValue("tableAlias");
 	}
-
+	
+	@Override
+	public String toString() {
+		return this.getName() + ":" + this.properties.toString();
+	}
 }

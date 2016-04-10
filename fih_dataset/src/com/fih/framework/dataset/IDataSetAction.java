@@ -32,6 +32,8 @@ public interface IDataSetAction extends IPropertySet {
 	 * @return
 	 */
 	IDataSetActionParameter getInputParameter(int paramInt);
+	
+	void addInputParameter(IDataSetActionParameter parameter);
 
 	  /**
 	   * 全部输入参数
@@ -45,6 +47,8 @@ public interface IDataSetAction extends IPropertySet {
 	 * @return
 	 */
 	IDataSetActionParameter getOutputParameter(int paramInt);
+	
+	void addOutputParameter(IDataSetActionParameter parameter);
 
 	  /**
 	   * 获得全部输出参数

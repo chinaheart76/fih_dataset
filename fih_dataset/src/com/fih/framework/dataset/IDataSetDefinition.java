@@ -1,7 +1,6 @@
 package com.fih.framework.dataset;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * 文件名：IDataSetDefinition.java<br>
@@ -47,13 +46,6 @@ public interface IDataSetDefinition extends IPropertySet {
 	 * @return
 	 */
 	int getColIndex(String colName);
-
-	  /**
-	   * 列编号
-	 * @param colName
-	 * @return
-	 */
-	int getColNumber(String colName);
 	  
 	  /**
 	   * 列序号对应的列名
@@ -72,7 +64,7 @@ public interface IDataSetDefinition extends IPropertySet {
 	   * 数据操作集
 	 * @return
 	 */
-	Set<IDataSetAction> getAllActions();
+	List<IDataSetAction> getAllActions();
 
 	  /**
 	   * 获得特定操作的操作集
@@ -104,6 +96,9 @@ public interface IDataSetDefinition extends IPropertySet {
 	 * @return
 	 */
 	boolean canQuery();
+	
+	void addColumnDefinition(IDataSetColumnDefinition columnDefinition);
+	IDataSetAction addAction(IDataSetAction action);
 
 }
 

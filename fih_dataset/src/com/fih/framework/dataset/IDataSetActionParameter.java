@@ -15,6 +15,8 @@ import java.io.Serializable;
 public interface IDataSetActionParameter extends IPropertySet {
 	
 	String getName();
+	String getValue();
+	String getCaption();
 
 }
 

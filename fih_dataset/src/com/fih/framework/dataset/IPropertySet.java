@@ -25,10 +25,13 @@ import java.util.List;
  */
 public interface IPropertySet extends Serializable {
 
+	String getPropertyValue(String nameProperty);
 	Property getProperty(String propertyName);
 	
-	void addProperty(Property property);
-	void addProperty(String name,String value);
+	String setPropertyValue(String name ,String value);
+	
+	Property addProperty(Property property);
+	Property addProperty(String name,String value);
 	
 	Property removeProperty(String name);
 	

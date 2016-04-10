@@ -26,6 +26,9 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 * @return
 	 */
 	List<IDataSetRow> getRows();
+	List<IDataSetRow> getRows(int start,int end);
+	List<IDataSetRow> getRows(int[] rows);
+	IDataSetRow getRow(int row);
 	
 	/**
 	 * 数据集行数
@@ -33,12 +36,6 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 */
 	int getRowCount();
 	
-	/**
-	 * 数据集列集合
-	 * @return
-	 */
-	List<IDataSetColumns> getColumns();
-	/**
 	 * 数据集特定数据列
 	 * @param col
 	 * @return
@@ -51,8 +48,8 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 * @param col
 	 * @return
 	 */
-	IDataSetColumns getColumn(int[] col);
-	IDataSetColumns getColumn(String[] colName);
+	List<IDataSetColumns> getColumn(int[] col);
+	List<IDataSetColumns> getColumn(String[] colName);
 
 	/**
 	 * 数据集列数

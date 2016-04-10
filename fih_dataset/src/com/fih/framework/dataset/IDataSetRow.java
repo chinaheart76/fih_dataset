@@ -30,7 +30,7 @@ public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	 * @param columnName	列名
 	 * @return
 	 */
-	IDataSetDataItem get(String columnName);
+	//IDataSetDataItem get(String columnName);
 	/**
 	 * 获得数据行中的一个数据项
 	 * @param columnNo	列序号
@@ -43,6 +43,8 @@ public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	 * @return	数据项集合
 	 */
 	List<IDataSetDataItem> getColumns();
+	List<IDataSetDataItem> getColumns(int start,int end);
+	List<IDataSetDataItem> getColumns(int[] cols);
 	
 	/**
 	 * 数据行的数据项数量
@@ -67,8 +69,8 @@ public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	 * @param columnName
 	 * @param data
 	 */
-	void set(String columnName,IDataSetDataItem data);
-	void set(int columnNo,IDataSetDataItem data);
+	//void set(String columnName,IDataSetDataItem data);
+	IDataSetDataItem set(int columnNo,IDataSetDataItem data);
 
 }
 
