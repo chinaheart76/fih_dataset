@@ -1,6 +1,7 @@
 package com.fih.framework.dataset.impl.dataset;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +21,20 @@ public class DataSetRowImpl implements IDataSetRow {
 	public DataSetRowImpl(int cols) {
 		super();
 		data = new ArrayList<IDataSetDataItem>(cols);
+	}
+	
+	public DataSetRowImpl(IDataSetDataItem[] cols) {
+		this(cols.length);
+		for(IDataSetDataItem item:cols){
+			data.add(item);
+		}
+	}
+	
+	public DataSetRowImpl(List<IDataSetDataItem> cols) {
+		this(cols.size());
+		for(IDataSetDataItem item:cols){
+			data.add(item);
+		}
 	}
 
 	@Override

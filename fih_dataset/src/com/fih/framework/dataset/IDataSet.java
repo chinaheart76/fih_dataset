@@ -80,8 +80,8 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 * @param col
 	 * @param data
 	 */
-	void set(int row,int col,IDataSetDataItem data);
-	void set(int row,String colName,IDataSetDataItem data);
+	IDataSetDataItem set(int row,int col,IDataSetDataItem data);
+	IDataSetDataItem set(int row,String colName,IDataSetDataItem data);
 	
 	/**
 	 * 添加数据行
@@ -90,7 +90,10 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	void addRow(IDataSetRow row);
 	void addRows(IDataSetRow[] rows);
 	void addRows(List<IDataSetRow> rows);
-	
+
+	void addRow(IDataSetDataItem[] columnsDataItem);
+	void addRow(List<IDataSetDataItem> columnsDataItem);
+		
 	/**
 	 * 获得数据集
 	 * @param startRow

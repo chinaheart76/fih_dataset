@@ -1,6 +1,7 @@
 package com.fih.framework.dataset.impl.dataset;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class DataSetImpl implements IDataSet {
 	private static final long serialVersionUID = 9074188902520573133L;
 	protected IDataSetDefinition define;
 	protected List<IDataSetRow> rows;
-	private int total;
+	private int total =0;
 	private volatile boolean changed = false;
 
 	private DataSetImpl() {
@@ -113,13 +114,25 @@ public class DataSetImpl implements IDataSet {
 		if(col == null || col.length == 0)
 			return null;
 		
-		return null;
+		DataSetColumnsImpl[] columns = new DataSetColumnsImpl[col.length];
+		for(IDataSetRow row:this.rows){
+			for(int i=0;i<col.length;i++){
+				columns[i].addRow(row.get(col[i]));
+			}
+		}
+		
+		return Arrays.asList(columns);
 	}
 
 	@Override
 	public List<IDataSetColumns> getColumn(String[] colName) {
-		// TODO Auto-generated method stub
-		return null;
+		int[] col = new int[colName.length];
+		
+		for(int i=0;i<colName.length;i++){
+			col[i] = this.define.getColIndex(colName[i]);
+		}
+		
+		return this.getColumn(col);
 	}
 
 	@Override
@@ -134,50 +147,64 @@ public class DataSetImpl implements IDataSet {
 
 	@Override
 	public IDataSetDataItem get(int row, int col) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.rows.get(row).get(col);
 	}
 
 	@Override
 	public IDataSetDataItem get(int row, String colName) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.get(row, this.define.getColIndex(colName));
 	}
 
 	@Override
-	public void set(int row, int col, IDataSetDataItem data) {
-		// TODO Auto-generated method stub
-
+	public IDataSetDataItem set(int row, int col, IDataSetDataItem data) {
+		
+		IDataSetDataItem dataItem= this.rows.get(row).set(col, data);
+		this.changed = true;
+		return dataItem;
 	}
 
 	@Override
-	public void set(int row, String colName, IDataSetDataItem data) {
-		// TODO Auto-generated method stub
-
+	public IDataSetDataItem set(int row, String colName, IDataSetDataItem data) {
+		return this.set(row, this.define.getColIndex(colName), data);
 	}
 
 	@Override
 	public void addRow(IDataSetRow row) {
-		// TODO Auto-generated method stub
-
+		this.rows.add(row);
 	}
 
 	@Override
 	public void addRows(IDataSetRow[] rows) {
-		// TODO Auto-generated method stub
-
+		for(IDataSetRow row:rows){
+			this.rows.add(row);
+		}
 	}
 
 	@Override
 	public void addRows(List<IDataSetRow> rows) {
-		// TODO Auto-generated method stub
+		this.rows.addAll(rows);
+	}
 
+	@Override
+	public void addRow(IDataSetDataItem[] columnsDataItem) {
+		this.rows.add(new DataSetRowImpl(columnsDataItem));
+	}
+
+	@Override
+	public void addRow(List<IDataSetDataItem> columnsDataItem) {
+		this.rows.add(new DataSetRowImpl(columnsDataItem));
 	}
 
 	@Override
 	public IDataSet getDataSet(int startRow, int endRow) {
-		// TODO Auto-generated method stub
-		return null;
+		IDataSet dataSet = new DataSetImpl();
+		((DataSetImpl)dataSet).define = this.define;
+		for(int i = startRow;i<=endRow;i++){
+			((DataSetImpl)dataSet).rows.add(this.rows.get(i));
+		}
+		((DataSetImpl)dataSet).total = endRow - startRow +1;
+		
+		return dataSet;
 	}
 
 	@Override
@@ -194,8 +221,7 @@ public class DataSetImpl implements IDataSet {
 
 	@Override
 	public void accept(IDataSetVisitor visitor) {
-		// TODO Auto-generated method stub
-
+		visitor.visit(this);
 	}
 
 }
