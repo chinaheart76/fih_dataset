@@ -13,7 +13,7 @@ import java.util.List;
  *数据集的数据列接口
  */
 
-public interface IDataSetColumns extends Serializable,Iterable<IDataSetDataItem> {
+public interface IDataSetColumn extends Serializable,Iterable<IDataSetDataItem> {
 	
 	/**
 	 * 获得第几行数据项

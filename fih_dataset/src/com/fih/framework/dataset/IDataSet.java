@@ -41,16 +41,16 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 * @param col
 	 * @return
 	 */
-	IDataSetColumns getColumn(int col);
-	IDataSetColumns getColumn(String colName);
+	IDataSetColumn getColumn(int col);
+	IDataSetColumn getColumn(String colName);
 	
 	/**
 	 * 数据集多个数据列
 	 * @param col
 	 * @return
 	 */
-	List<IDataSetColumns> getColumn(int[] col);
-	List<IDataSetColumns> getColumn(String[] colName);
+	List<IDataSetColumn> getColumns(int[] col);
+	List<IDataSetColumn> getColumns(String[] colName);
 
 	/**
 	 * 数据集列数

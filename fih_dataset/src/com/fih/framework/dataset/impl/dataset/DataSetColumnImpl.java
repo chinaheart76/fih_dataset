@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.fih.framework.dataset.IDataSetColumns;
+import com.fih.framework.dataset.IDataSetColumn;
 import com.fih.framework.dataset.IDataSetDataItem;
 
-public class DataSetColumnsImpl implements IDataSetColumns {
+public class DataSetColumnImpl implements IDataSetColumn {
 
 	private static final long serialVersionUID = 2929794170205772250L;
 	private List<IDataSetDataItem> data;
 
-	private DataSetColumnsImpl() {
+	private DataSetColumnImpl() {
 		super();
 	}
 	
-	public DataSetColumnsImpl(int rows){
+	public DataSetColumnImpl(int rows){
 		super();
 		this.data = new ArrayList<IDataSetDataItem>(rows);
 	}
 	
-	public DataSetColumnsImpl(List<IDataSetDataItem> data){
+	public DataSetColumnImpl(List<IDataSetDataItem> data){
 		super();
 		this.data = data;
 	}

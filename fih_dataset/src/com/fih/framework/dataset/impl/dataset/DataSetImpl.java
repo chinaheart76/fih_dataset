@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.fih.framework.dataset.IDataSet;
-import com.fih.framework.dataset.IDataSetColumns;
+import com.fih.framework.dataset.IDataSetColumn;
 import com.fih.framework.dataset.IDataSetDataItem;
 import com.fih.framework.dataset.IDataSetDefinition;
 import com.fih.framework.dataset.IDataSetRow;
@@ -20,9 +20,9 @@ public class DataSetImpl implements IDataSet {
 	private int total =0;
 	private volatile boolean changed = false;
 
-	private DataSetImpl() {
+	/*private DataSetImpl() {
 		super();
-	}
+	}*/
 
 	@Override
 	public Iterator<IDataSetRow> iterator() {
@@ -92,11 +92,11 @@ public class DataSetImpl implements IDataSet {
 	}
 
 	@Override
-	public IDataSetColumns getColumn(int col) {
+	public IDataSetColumn getColumn(int col) {
 		if(col<=0 || col> this.getColumnCount())
 			return null;
 		
-		DataSetColumnsImpl column = new DataSetColumnsImpl(this.rows.size());
+		DataSetColumnImpl column = new DataSetColumnImpl(this.rows.size());
 		for(IDataSetRow row:this.rows){
 			column.addRow(row.get(col));
 		}
@@ -105,16 +105,16 @@ public class DataSetImpl implements IDataSet {
 	}
 
 	@Override
-	public IDataSetColumns getColumn(String colName) {
+	public IDataSetColumn getColumn(String colName) {
 		return this.getColumn(this.define.getColIndex(colName));
 	}
 
 	@Override
-	public List<IDataSetColumns> getColumn(int[] col) {
+	public List<IDataSetColumn> getColumns(int[] col) {
 		if(col == null || col.length == 0)
 			return null;
 		
-		DataSetColumnsImpl[] columns = new DataSetColumnsImpl[col.length];
+		DataSetColumnImpl[] columns = new DataSetColumnImpl[col.length];
 		for(IDataSetRow row:this.rows){
 			for(int i=0;i<col.length;i++){
 				columns[i].addRow(row.get(col[i]));
@@ -125,14 +125,14 @@ public class DataSetImpl implements IDataSet {
 	}
 
 	@Override
-	public List<IDataSetColumns> getColumn(String[] colName) {
+	public List<IDataSetColumn> getColumns(String[] colName) {
 		int[] col = new int[colName.length];
 		
 		for(int i=0;i<colName.length;i++){
 			col[i] = this.define.getColIndex(colName[i]);
 		}
 		
-		return this.getColumn(col);
+		return this.getColumns(col);
 	}
 
 	@Override
