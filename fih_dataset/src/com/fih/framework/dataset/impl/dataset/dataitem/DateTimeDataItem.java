@@ -1,5 +1,7 @@
 package com.fih.framework.dataset.impl.dataset.dataitem;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,6 +31,11 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 	public DateTimeDataItem(java.sql.Timestamp value) {
 		super();
 		this.value = value;
+	}
+
+	public DateTimeDataItem(String paramString) throws ParseException {
+		Date localDate = getDefaultFormat().parse(paramString);
+		this.value = localDate;
 	}
 
 	@Override
@@ -128,5 +135,10 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 			return "'" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.value) + "'";
 		return this.value.toString();
 	}
-	
+
+	  public static DateFormat getDefaultFormat()
+	  {
+	    return new SimpleDateFormat("yyyy-MM-dd");
+	  }
+
 }
