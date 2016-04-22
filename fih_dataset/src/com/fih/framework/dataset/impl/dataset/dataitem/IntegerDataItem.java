@@ -12,21 +12,25 @@ public class IntegerDataItem extends AbstractDataItem<Integer> {
 	public IntegerDataItem(int value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	public IntegerDataItem(long value) {
 		super();
 		this.value = (int) value;
+		this.setOldValue((int) value);
 	}
 	
 	public IntegerDataItem(Integer value) {
 		super();
 		this.value = value.intValue();
+		this.setOldValue(value);
 	}
 	
 	public IntegerDataItem(Long value) {
 		super();
 		this.value = value.intValue();
+		this.setOldValue(value.intValue());
 	}
 	
 	@Override

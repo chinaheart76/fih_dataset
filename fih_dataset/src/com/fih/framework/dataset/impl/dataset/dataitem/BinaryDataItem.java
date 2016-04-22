@@ -23,6 +23,7 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 	public BinaryDataItem(byte[] value) {
 		super();
 		this.setValue(value);
+		this.setOldValue(value);
 	}
 
 	@Override

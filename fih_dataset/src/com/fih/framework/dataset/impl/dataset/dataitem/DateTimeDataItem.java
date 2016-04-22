@@ -16,26 +16,31 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 	public DateTimeDataItem(Date value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	public DateTimeDataItem(java.sql.Date value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 	
 	public DateTimeDataItem(java.sql.Time value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	public DateTimeDataItem(java.sql.Timestamp value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	public DateTimeDataItem(String paramString) throws ParseException {
 		Date localDate = getDefaultFormat().parse(paramString);
 		this.value = localDate;
+		this.setOldValue(localDate);
 	}
 
 	@Override

@@ -9,6 +9,8 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	
 	private static final long serialVersionUID = 3885597360692560530L;
 	
+	private T oldValue;
+	
 	@Override
 	public DataItemType getDataType() {
 		return this.getType();
@@ -31,6 +33,21 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	@Override
 	public void accept(IDataSetDataItemVisitor<T> visitor){
 		visitor.visit(this);
+	}
+	
+	@Override
+	public T getOldValue(){
+		return this.oldValue;
+	}
+	
+	
+	public void setOldValue(T oldValue) {
+		this.oldValue = oldValue;
+	}
+
+	@Override
+	public boolean isDirty(){
+		return !this.get().equals(this.oldValue);
 	}
 
 }

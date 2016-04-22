@@ -12,41 +12,49 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 	public DecimalDataItem(int value) {
 		super();
 		this.value = value;
+		this.setOldValue((double) value);
 	}
 
 	public DecimalDataItem(long value) {
 		super();
 		this.value = value;
+		this.setOldValue((double) value);
 	}
 	
 	public DecimalDataItem(float value) {
 		super();
 		this.value = value;
+		this.setOldValue((double) value);
 	}
 	
 	public DecimalDataItem(double value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 	
 	public DecimalDataItem(Double value) {
 		super();
 		this.value = value.doubleValue();
+		this.setOldValue(value);
 	}
 	
 	public DecimalDataItem(Long value) {
 		super();
 		this.value = value.doubleValue();
+		this.setOldValue(value.doubleValue());
 	}
 	
 	public DecimalDataItem(Integer value) {
 		super();
 		this.value = value.doubleValue();
+		this.setOldValue(value.doubleValue());
 	}
 	
 	public DecimalDataItem(Float value) {
 		super();
 		this.value = value.doubleValue();
+		this.setOldValue(value.doubleValue());
 	}
 	
 	@Override

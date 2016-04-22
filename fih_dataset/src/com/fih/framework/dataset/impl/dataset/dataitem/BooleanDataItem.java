@@ -11,6 +11,7 @@ public class BooleanDataItem extends AbstractDataItem<Boolean> {
 	public BooleanDataItem(boolean value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	@Override

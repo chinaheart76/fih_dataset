@@ -17,21 +17,25 @@ public class LongDataItem extends AbstractDataItem<Long> {
 	public LongDataItem(long value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	public LongDataItem(int value) {
 		super();
 		this.value = value;
+		this.setOldValue((long) value);
 	}
 
 	public LongDataItem(Long value) {
 		super();
 		this.value = value.longValue();
+		this.setOldValue(value);
 	}
 
 	public LongDataItem(Integer value) {
 		super();
 		this.value = value.longValue();
+		this.setOldValue(value.longValue());
 	}
 
 	@Override

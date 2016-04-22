@@ -19,6 +19,7 @@ public class CollectionDataItem extends AbstractDataItem<List> {
 	public CollectionDataItem(List value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	@Override

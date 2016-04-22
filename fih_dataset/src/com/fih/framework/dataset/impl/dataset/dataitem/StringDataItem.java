@@ -11,6 +11,7 @@ public class StringDataItem extends AbstractDataItem<String> {
 	public StringDataItem(String value) {
 		super();
 		this.value = value;
+		this.setOldValue(value);
 	}
 
 	@Override
