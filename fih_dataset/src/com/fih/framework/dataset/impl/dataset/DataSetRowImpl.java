@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.fih.framework.dataset.IDataSetDataItem;
+import com.fih.framework.dataset.IDataSetGetParent;
 import com.fih.framework.dataset.IDataSetRow;
 
 public class DataSetRowImpl implements IDataSetRow {
@@ -13,6 +14,12 @@ public class DataSetRowImpl implements IDataSetRow {
 	private static final long serialVersionUID = 2740224877233777291L;
 	private List<IDataSetDataItem> data;
 	private int state = 0;
+	private static long id = 0L;
+	
+	@Override
+	public long getId(){
+		return ++id;
+	}
 	
 	private DataSetRowImpl() {
 		super();
@@ -111,6 +118,11 @@ public class DataSetRowImpl implements IDataSetRow {
 				retList.add(this.data.get(i));
 		}
 		return retList;
+	}
+
+	@Override
+	public IDataSetGetParent<IDataSetRow,IDataSetDataItem> get2(int columnNo) {
+		return new DataSetGetParentImpl<IDataSetRow,IDataSetDataItem>(this,this.get(columnNo));
 	}
 
 }

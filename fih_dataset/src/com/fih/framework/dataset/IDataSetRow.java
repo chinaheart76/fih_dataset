@@ -25,6 +25,8 @@ import java.util.List;
  */
 public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	
+	long getId();
+	
 	/**
 	 * 获得数据行中的一个数据项
 	 * @param columnName	列名
@@ -37,6 +39,7 @@ public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	 * @return
 	 */
 	IDataSetDataItem get(int columnNo);
+	IDataSetGetParent<IDataSetRow,IDataSetDataItem> get2(int columnNo);
 	
 	/**
 	 * 返回数据行中的全部数据项

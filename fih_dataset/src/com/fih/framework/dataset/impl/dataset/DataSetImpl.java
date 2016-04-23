@@ -9,6 +9,7 @@ import com.fih.framework.dataset.IDataSet;
 import com.fih.framework.dataset.IDataSetColumn;
 import com.fih.framework.dataset.IDataSetDataItem;
 import com.fih.framework.dataset.IDataSetDefinition;
+import com.fih.framework.dataset.IDataSetGetParent;
 import com.fih.framework.dataset.IDataSetRow;
 import com.fih.framework.dataset.IDataSetVisitor;
 
@@ -222,6 +223,21 @@ public class DataSetImpl implements IDataSet {
 	@Override
 	public void accept(IDataSetVisitor visitor) {
 		visitor.visit(this);
+	}
+
+	@Override
+	public IDataSetGetParent<IDataSet,IDataSetRow> getRow2(int row) {
+		return new DataSetGetParentImpl<IDataSet, IDataSetRow>(this,this.getRow(row));
+	}
+
+	@Override
+	public IDataSetGetParent<IDataSet,IDataSetColumn> getColumn2(int col) {
+		return new DataSetGetParentImpl<IDataSet, IDataSetColumn>(this,this.getColumn(col));
+	}
+
+	@Override
+	public IDataSetGetParent<IDataSet,IDataSetColumn> getColumn2(String colName) {
+		return new DataSetGetParentImpl<IDataSet,IDataSetColumn>(this,this.getColumn(colName));
 	}
 
 }

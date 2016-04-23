@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fih.framework.dataset.IDataSetColumn;
 import com.fih.framework.dataset.IDataSetDataItem;
+import com.fih.framework.dataset.IDataSetGetParent;
 
 public class DataSetColumnImpl implements IDataSetColumn {
 
@@ -94,6 +95,11 @@ public class DataSetColumnImpl implements IDataSetColumn {
 	
 	public void addRow(IDataSetDataItem row){
 		this.data.add(row);
+	}
+
+	@Override
+	public IDataSetGetParent<IDataSetColumn,IDataSetDataItem> get2(int row) {
+		return new DataSetGetParentImpl<IDataSetColumn,IDataSetDataItem>(this,this.get(row));
 	}
 
 }
