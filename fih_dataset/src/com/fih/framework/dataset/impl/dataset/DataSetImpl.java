@@ -226,18 +226,18 @@ public class DataSetImpl implements IDataSet {
 	}
 
 	@Override
-	public IDataSetGetParent<IDataSet,IDataSetRow> getRow2(int row) {
-		return new DataSetGetParentImpl<IDataSet, IDataSetRow>(this,this.getRow(row));
+	public IDataSetGetParent<IDataSet,IDataSetRow> getRow(int row,boolean b) {
+		return new DataSetGetParentImpl<IDataSet, IDataSetRow>(b?this:null,this.getRow(row));
 	}
 
 	@Override
-	public IDataSetGetParent<IDataSet,IDataSetColumn> getColumn2(int col) {
-		return new DataSetGetParentImpl<IDataSet, IDataSetColumn>(this,this.getColumn(col));
+	public IDataSetGetParent<IDataSet,IDataSetColumn> getColumn(int col,boolean b) {
+		return new DataSetGetParentImpl<IDataSet, IDataSetColumn>(b?this:null,this.getColumn(col));
 	}
 
 	@Override
-	public IDataSetGetParent<IDataSet,IDataSetColumn> getColumn2(String colName) {
-		return new DataSetGetParentImpl<IDataSet,IDataSetColumn>(this,this.getColumn(colName));
+	public IDataSetGetParent<IDataSet,IDataSetColumn> getColumn(String colName,boolean b) {
+		return new DataSetGetParentImpl<IDataSet,IDataSetColumn>(b?this:null,this.getColumn(colName));
 	}
 
 }

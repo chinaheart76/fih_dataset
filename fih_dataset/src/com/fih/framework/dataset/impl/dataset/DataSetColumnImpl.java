@@ -98,8 +98,8 @@ public class DataSetColumnImpl implements IDataSetColumn {
 	}
 
 	@Override
-	public IDataSetGetParent<IDataSetColumn,IDataSetDataItem> get2(int row) {
-		return new DataSetGetParentImpl<IDataSetColumn,IDataSetDataItem>(this,this.get(row));
+	public IDataSetGetParent<IDataSetColumn,IDataSetDataItem> get(int row,boolean b) {
+		return new DataSetGetParentImpl<IDataSetColumn,IDataSetDataItem>(b?this:null,this.get(row));
 	}
 
 }

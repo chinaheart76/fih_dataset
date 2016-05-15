@@ -121,8 +121,8 @@ public class DataSetRowImpl implements IDataSetRow {
 	}
 
 	@Override
-	public IDataSetGetParent<IDataSetRow,IDataSetDataItem> get2(int columnNo) {
-		return new DataSetGetParentImpl<IDataSetRow,IDataSetDataItem>(this,this.get(columnNo));
+	public IDataSetGetParent<IDataSetRow,IDataSetDataItem> get(int columnNo,boolean b) {
+		return new DataSetGetParentImpl<IDataSetRow,IDataSetDataItem>(b?this:null,this.get(columnNo));
 	}
 
 }

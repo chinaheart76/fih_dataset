@@ -21,7 +21,7 @@ public interface IDataSetColumn extends Serializable,Iterable<IDataSetDataItem> 
 	 * @return
 	 */
 	IDataSetDataItem get(int row);
-	IDataSetGetParent<IDataSetColumn,IDataSetDataItem> get2(int row);
+	IDataSetGetParent<IDataSetColumn,IDataSetDataItem> get(int row,boolean b);
 	/**
 	 * 修改第几行数据项
 	 * @param row
