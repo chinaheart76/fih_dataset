@@ -57,6 +57,12 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 		this.setOldValue(value.doubleValue());
 	}
 	
+	public DecimalDataItem(String value){
+		super();
+		this.value = Double.parseDouble(value);
+		this.setOldValue(Double.parseDouble(value));
+	}
+	
 	@Override
 	public DataItemType getType() {
 		return DataItemType.DECIMAL;
@@ -204,6 +210,26 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 	@Override
 	public String toString() {
 		return ""+this.value;
+	}
+
+	@Override
+	public String getValueString() {
+		return String.valueOf(this.value);
+	}
+
+	@Override
+	public void setValueString(String value) {
+		this.value = Double.parseDouble(value);
+	}
+
+	@Override
+	public String getOldValueString() {
+		return String.valueOf(this.getOldValue());
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		this.setOldValue(Double.parseDouble(oldValue));
 	}
 	
 }

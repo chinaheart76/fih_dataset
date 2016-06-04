@@ -1,5 +1,7 @@
 package com.fih.framework.dataset.impl.dataset.dataitem;
 
+import java.text.ParseException;
+
 import com.fih.framework.dataset.DataItemType;
 import com.fih.framework.dataset.IDataSetDataItem;
 
@@ -12,6 +14,12 @@ public class BooleanDataItem extends AbstractDataItem<Boolean> {
 		super();
 		this.value = value;
 		this.setOldValue(value);
+	}
+	
+	public BooleanDataItem(String value){
+		super();
+		this.value = Boolean.parseBoolean(value);
+		this.setOldValue(Boolean.parseBoolean(value));
 	}
 
 	@Override
@@ -80,6 +88,26 @@ public class BooleanDataItem extends AbstractDataItem<Boolean> {
 	@Override
 	public String toString() {
 		return Boolean.toString(this.value);
+	}
+
+	@Override
+	public String getValueString() {
+		return String.valueOf(this.value);
+	}
+
+	@Override
+	public void setValueString(String value) {
+		this.value = Boolean.parseBoolean(value);
+	}
+
+	@Override
+	public String getOldValueString() {
+		return String.valueOf(this.getOldValue());
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		this.setOldValue(Boolean.parseBoolean(oldValue));
 	}
 
 }

@@ -60,4 +60,24 @@ public class NullDataItem extends AbstractDataItem<Object> {
 		return -1;
 	}
 
+	@Override
+	public String getValueString() {
+		return null;
+	}
+
+	@Override
+	public void setValueString(String value) {
+		
+	}
+
+	@Override
+	public String getOldValueString() {
+		return null;
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		
+	}
+
 }

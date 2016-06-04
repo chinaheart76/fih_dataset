@@ -33,6 +33,12 @@ public class IntegerDataItem extends AbstractDataItem<Integer> {
 		this.setOldValue(value.intValue());
 	}
 	
+	public IntegerDataItem(String value){
+		super();
+		this.value = Integer.parseInt(value);
+		this.setOldValue(Integer.parseInt(value));
+	}
+	
 	@Override
 	public DataItemType getType() {
 		return DataItemType.INTEGER;
@@ -165,6 +171,26 @@ public class IntegerDataItem extends AbstractDataItem<Integer> {
 	
 	LongDataItem getLongDataItem(){
 		return new LongDataItem(this.value);
+	}
+
+	@Override
+	public String getValueString() {
+		return String.valueOf(this.value);
+	}
+
+	@Override
+	public void setValueString(String value) {
+		this.setOldValue(Integer.parseInt(value));
+	}
+
+	@Override
+	public String getOldValueString() {
+		return String.valueOf(this.value);
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		this.setOldValue(Integer.parseInt(oldValue));
 	}
 
 }

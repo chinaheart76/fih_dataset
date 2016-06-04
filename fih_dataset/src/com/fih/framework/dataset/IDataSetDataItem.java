@@ -1,6 +1,7 @@
 package com.fih.framework.dataset;
 
 import java.io.Serializable;
+import java.text.ParseException;
 
 /**
  * 文件名：IDataSetData.java<br>
@@ -79,6 +80,14 @@ public interface IDataSetDataItem<T> extends Serializable,Comparable<IDataSetDat
 	 * @param visitor
 	 */
 	void accept(IDataSetDataItemVisitor<T> visitor);
+	
+	String getValueString();
+	
+	void setValueString(String value);
+	
+	String getOldValueString();
+	
+	void setOldValueString(String oldValue);
 	
 }
 

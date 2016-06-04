@@ -74,4 +74,24 @@ public class StringDataItem extends AbstractDataItem<String> {
 		return this.value;
 	}
 
+	@Override
+	public String getValueString() {
+		return this.value;
+	}
+
+	@Override
+	public void setValueString(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String getOldValueString() {
+		return this.getOldValue();
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		this.setOldValue(oldValue);
+	}
+
 }

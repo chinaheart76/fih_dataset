@@ -1,5 +1,7 @@
 package com.fih.framework.dataset.impl.dataset.dataitem;
 
+import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.Arrays;
 
 import com.fih.framework.dataset.DataItemType;
@@ -24,6 +26,12 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 		super();
 		this.setValue(value);
 		this.setOldValue(value);
+	}
+	
+	public BinaryDataItem(String value){
+		super();
+		this.setValue(value.getBytes());
+		this.setOldValue(value.getBytes());
 	}
 
 	@Override
@@ -88,6 +96,26 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 	@Override
 	public String toString() {
 		return String.valueOf(this.value);
+	}
+
+	@Override
+	public String getValueString() {
+		return String.valueOf(this.value);
+	}
+
+	@Override
+	public void setValueString(String value) {
+		this.value = value.getBytes();
+	}
+
+	@Override
+	public String getOldValueString() {
+		return String.valueOf(this.getOldValue());
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		this.setOldValue(oldValue.getBytes());
 	}
 
 }

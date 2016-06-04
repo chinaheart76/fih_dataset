@@ -7,6 +7,7 @@ import java.util.Date;
 
 import com.fih.framework.dataset.DataItemType;
 import com.fih.framework.dataset.IDataSetDataItem;
+import com.fih.framework.dataset.excpt.DataItemDateErrorException;
 
 public class DateTimeDataItem extends AbstractDataItem<Date> {
 
@@ -145,5 +146,35 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 	  {
 	    return new SimpleDateFormat("yyyy-MM-dd");
 	  }
+
+	@Override
+	public String getValueString() {
+		return getDefaultFormat().format(this.value);
+	}
+
+	@Override
+	public void setValueString(String value) {
+		try {
+			this.value = getDefaultFormat().parse(value);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new DataItemDateErrorException();
+		}
+	}
+
+	@Override
+	public String getOldValueString() {
+		return getDefaultFormat().format(this.getOldValue());
+	}
+
+	@Override
+	public void setOldValueString(String oldValue) {
+		try {
+			this.setOldValue(getDefaultFormat().parse(oldValue));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new DataItemDateErrorException();
+		}
+	}
 
 }
