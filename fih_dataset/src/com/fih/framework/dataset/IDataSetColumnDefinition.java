@@ -71,6 +71,12 @@ public interface IDataSetColumnDefinition extends IPropertySet {
 	 * @return
 	 */
 	String getTableAlias();
+	
+	/**
+	 * 是否是主键
+	 * @return
+	 */
+	boolean isPrimaryKey();
 
 }
 

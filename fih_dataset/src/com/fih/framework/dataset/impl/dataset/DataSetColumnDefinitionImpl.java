@@ -64,4 +64,18 @@ public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSet
 	public String toString() {
 		return this.getName() + ":" + this.properties.toString();
 	}
+
+	@Override
+	public boolean isPrimaryKey() {
+		String value = getPropertyValue("isPrimaryKey");
+		if(null == value || "".equals(value.trim()) || "0".equals(value.trim()) || "false".equals(value.trim().toLowerCase())){
+			return false;
+		}
+		
+		if("1".equals(value.trim()) || "true".equals(value.trim().toLowerCase())){
+			return false;
+		}
+		
+		return false;
+	}
 }
