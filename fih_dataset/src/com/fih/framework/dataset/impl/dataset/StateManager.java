@@ -5,9 +5,12 @@ import com.fih.framework.dataset.IStateManager;
 
 public class StateManager implements IStateManager {
 	
+	public static int STATE_INIT = -1;
+	public static int STATE_MODIFY = 1;
+
 	private IDataSetDataItem _instance;
-	private int state;
-	private int oldState;
+	private int state = STATE_INIT;
+	private int oldState = STATE_INIT;
 
 	public StateManager(IDataSetDataItem _instance) {
 		super();
@@ -21,6 +24,7 @@ public class StateManager implements IStateManager {
 
 	@Override
 	public void setState(int state) {
+		this.oldState = this.state;
 		this.state = state;
 	}
 

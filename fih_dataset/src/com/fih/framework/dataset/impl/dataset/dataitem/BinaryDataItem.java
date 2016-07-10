@@ -52,12 +52,24 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 
 	@Override
 	public void setValue(byte[] data) {
-		System.arraycopy(data, 0, this.value, 0, data.length);
+//		System.arraycopy(data, 0, this.value, 0, data.length);
+		if(!Arrays.equals(this.value, data)){
+			byte[] newValue = new byte[this.value.length];
+			System.arraycopy(this.value, 0, newValue, 0, this.value.length);
+			
+//			this.setOldValue(newValue);
+			System.arraycopy(data, 0, this.value, 0, data.length);
+//			this.setDirty(true);
+		}
 	}
 
 	@Override
 	public void set(IDataSetDataItem<byte[]> data) {
-		this.setValue(data.getValue());
+		if(data instanceof BinaryDataItem){
+			this.setValue(((BinaryDataItem)data).getOriginValue());
+		}else{
+			this.setValue(data.getValue());
+		}
 	}
 
 	public void set(BinaryDataItem data) {

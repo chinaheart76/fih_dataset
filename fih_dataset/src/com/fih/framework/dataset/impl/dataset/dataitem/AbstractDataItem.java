@@ -12,10 +12,11 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	private static final long serialVersionUID = 3885597360692560530L;
 	
 	private T oldValue;
-	private IStateManager _stateManager = new StateManager(this);
+//	private IStateManager _stateManager = new StateManager(this);
 	private boolean isPrimaryKey = false;
 	private boolean isReadyOnly = false;
 	private boolean isDBINIT = false;
+//	private boolean isDirty = false;
 	
 	@Override
 	public DataItemType getDataType() {
@@ -54,16 +55,22 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	@Override
 	public boolean isDirty(){
 		return !this.get().equals(this.oldValue);
+//		return isDirty;
 	}
 	
-	@Override
-	public boolean isStateDirty(){
-		return this._stateManager.isDirty();
-	}
+//	protected void setDirty(boolean b){
+//		this.isDirty = b;
+//	}
+	
+//	@Override
+//	public boolean isStateDirty(){
+//		return this._stateManager.isDirty();
+//	}
 
 	@Override
 	public int getState() {
-		return this._stateManager.getState();
+//		return this._stateManager.getState();
+		return 0;
 	}
 
 	@Override
@@ -109,9 +116,9 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 		this.isReadyOnly = isReadyOnly;
 	}
 
-	public IStateManager get_stateManager() {
-		return _stateManager;
-	}
+//	public IStateManager get_stateManager() {
+//		return _stateManager;
+//	}
 
 	@Override
 	public boolean isDBINIT() {

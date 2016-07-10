@@ -138,7 +138,7 @@ public interface IDataSetDataItem<T> extends Serializable,Comparable<IDataSetDat
 	 * 数据项的状态是否脏
 	 * @return
 	 */
-	boolean isStateDirty();
+//	boolean isStateDirty();
 	void setReadyOnly(boolean isReadyOnly);
 	boolean isReadyOnly();
 	void setPrimaryKey(boolean isPrimaryKey);
