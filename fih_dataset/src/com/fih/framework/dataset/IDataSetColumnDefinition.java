@@ -1,6 +1,7 @@
 package com.fih.framework.dataset;
 
-import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 文件名：IDataSetColumnDefinition.java<br>
@@ -77,6 +78,14 @@ public interface IDataSetColumnDefinition extends IPropertySet {
 	 * @return
 	 */
 	boolean isPrimaryKey();
+	
+	Map<String, String> getCodeList();
+	
+	void setCodeList(Map<String,String> codelist);
+	
+	void addCodeList(String code,String value);
+	
+	void deleteCodeList(String code);
 
 }
 

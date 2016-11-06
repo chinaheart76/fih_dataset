@@ -1,6 +1,7 @@
 package com.fih.framework.dataset.impl.dataset.dataitem;
 
-import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.fih.framework.dataset.DataItemType;
@@ -10,7 +11,8 @@ import com.fih.framework.dataset.IDataSetDataItem;
 public class CollectionDataItem<T> extends AbstractDataItem<List<T>> {
 
 	private static final long serialVersionUID = -2033045237708108505L;
-	private List<T> value;
+	private List<T> value = null;
+	private List<T> old = null;
 
 	@Override
 	public DataItemType getType() {
@@ -19,8 +21,8 @@ public class CollectionDataItem<T> extends AbstractDataItem<List<T>> {
 
 	public CollectionDataItem(List<T> value) {
 		super();
-		this.value = value;
-		this.setOldValue(value);
+		this.value =value;
+		this.old = Collections.unmodifiableList(value);
 	}
 
 	@Override
@@ -33,10 +35,10 @@ public class CollectionDataItem<T> extends AbstractDataItem<List<T>> {
 		this.value = data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<List<T>> data) {
 		this.value = data.getValue();
-	}
+	}*/
 
 	public void set(CollectionDataItem<T> data) {
 		this.value = data.getValue();
@@ -89,9 +91,24 @@ public class CollectionDataItem<T> extends AbstractDataItem<List<T>> {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<List<T>>> void set(D data) {
+		this.value = data.getValue();
+	}
+
+	@Override
+	public List<T> getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return this.value.equals(this.old);
 	}
 
 }

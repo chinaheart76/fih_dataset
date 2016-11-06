@@ -12,6 +12,7 @@ public class DataSetColumnImpl implements IDataSetColumn {
 
 	private static final long serialVersionUID = 2929794170205772250L;
 	private List<IDataSetDataItem> data;
+	private final int columnId = 0;
 
 	private DataSetColumnImpl() {
 		super();
@@ -24,7 +25,8 @@ public class DataSetColumnImpl implements IDataSetColumn {
 	
 	public DataSetColumnImpl(List<IDataSetDataItem> data){
 		super();
-		this.data = data;
+		this.data = new ArrayList<IDataSetDataItem>();
+		this.data.addAll(data);
 	}
 
 	@Override
@@ -100,6 +102,11 @@ public class DataSetColumnImpl implements IDataSetColumn {
 	@Override
 	public IDataSetGetParent<IDataSetColumn,IDataSetDataItem> get(int row,boolean b) {
 		return new DataSetGetParentImpl<IDataSetColumn,IDataSetDataItem>(b?this:null,this.get(row));
+	}
+
+	@Override
+	public int getColumnId() {
+		return this.columnId;
 	}
 
 }

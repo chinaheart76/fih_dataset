@@ -21,17 +21,22 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 
 	private static final long serialVersionUID = 141334279286096578L;
 	private byte[] value;
+	private byte[] old;
 
 	public BinaryDataItem(byte[] value) {
 		super();
-		this.setValue(value);
-		this.setOldValue(value);
+		this.value = new byte[value.length];
+		System.arraycopy(value, 0, this.value, 0, value.length);
+		this.old = new byte[value.length];
+		System.arraycopy(value, 0, this.old, 0, value.length);
 	}
 	
 	public BinaryDataItem(String value){
 		super();
-		this.setValue(value.getBytes());
-		this.setOldValue(value.getBytes());
+		this.value = new byte[value.getBytes().length];
+		System.arraycopy(value.getBytes(), 0, this.value, 0, value.getBytes().length);
+		this.old = new byte[value.getBytes().length];
+		System.arraycopy(value.getBytes(), 0, this.old, 0, value.getBytes().length);
 	}
 
 	@Override
@@ -63,14 +68,14 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 		}
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<byte[]> data) {
 		if(data instanceof BinaryDataItem){
 			this.setValue(((BinaryDataItem)data).getOriginValue());
 		}else{
 			this.setValue(data.getValue());
 		}
-	}
+	}*/
 
 	public void set(BinaryDataItem data) {
 		this.setValue(data.getOriginValue());
@@ -125,9 +130,28 @@ public class BinaryDataItem extends AbstractDataItem<byte[]> {
 		return String.valueOf(this.getOldValue());
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		this.setOldValue(oldValue.getBytes());
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<byte[]>> void set(D data) {
+		if(data instanceof BinaryDataItem){
+			this.setValue(((BinaryDataItem)data).getOriginValue());
+		}else{
+			this.setValue(data.getValue());
+		}
+	}
+
+	@Override
+	public byte[] getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return Arrays.equals(this.value, this.old);
 	}
 
 }

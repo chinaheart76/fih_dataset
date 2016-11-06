@@ -13,35 +13,36 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 
 	private static final long serialVersionUID = 313956190329091770L;
 	private Date value;
+	private Date old;
 
 	public DateTimeDataItem(Date value) {
 		super();
-		this.value = value;
-		this.setOldValue(value);
+		this.value = new Date(value.getTime());
+		this.old = new Date(value.getTime());
 	}
 
 	public DateTimeDataItem(java.sql.Date value) {
 		super();
-		this.value = value;
-		this.setOldValue(value);
+		this.value = new Date(value.getTime());
+		this.old = new Date(value.getTime());
 	}
 	
 	public DateTimeDataItem(java.sql.Time value) {
 		super();
-		this.value = value;
-		this.setOldValue(value);
+		this.value = new Date(value.getTime());
+		this.old = new Date(value.getTime());
 	}
 
 	public DateTimeDataItem(java.sql.Timestamp value) {
 		super();
-		this.value = value;
-		this.setOldValue(value);
+		this.value = new Date(value.getTime());
+		this.old = new Date(value.getTime());
 	}
 
 	public DateTimeDataItem(String paramString) throws ParseException {
 		Date localDate = getDefaultFormat().parse(paramString);
 		this.value = localDate;
-		this.setOldValue(localDate);
+		this.old = new Date(localDate.getTime());
 	}
 
 	@Override
@@ -71,10 +72,10 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 		this.value = data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<Date> data) {
 		this.value = data.getValue();
-	}
+	}*/
 	
 	public void set(Date data) {
 		this.value = data;
@@ -167,7 +168,7 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 		return getDefaultFormat().format(this.getOldValue());
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		try {
 			this.setOldValue(getDefaultFormat().parse(oldValue));
@@ -175,6 +176,21 @@ public class DateTimeDataItem extends AbstractDataItem<Date> {
 			e.printStackTrace();
 			throw new DataItemDateErrorException();
 		}
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<Date>> void set(D data) {
+		this.value = data.getValue();
+	}
+
+	@Override
+	public Date getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return this.value.getTime() != this.old.getTime();
 	}
 
 }

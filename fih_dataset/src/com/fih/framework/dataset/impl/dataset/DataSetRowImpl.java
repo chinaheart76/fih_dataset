@@ -17,7 +17,7 @@ public class DataSetRowImpl implements IDataSetRow {
 	private static long id = 0L;
 	
 	@Override
-	public long getId(){
+	public long getRowId(){
 		return ++id;
 	}
 	

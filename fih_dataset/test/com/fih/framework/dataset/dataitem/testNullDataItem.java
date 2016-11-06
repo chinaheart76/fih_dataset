@@ -3,6 +3,7 @@ package com.fih.framework.dataset.dataitem;
 import com.fih.framework.dataset.DataItemType;
 import com.fih.framework.dataset.IDataSetDataItem;
 import com.fih.framework.dataset.impl.dataset.dataitem.NullDataItem;
+import com.fih.framework.dataset.utils.DataItemUtils;
 
 public class testNullDataItem {
 
@@ -17,7 +18,9 @@ public class testNullDataItem {
 		//单例模式创造对象
 		NullDataItem nullDataItem1 = NullDataItem.newInstance();
 		//默认构造函数私有
-		//NullDataItem nullDataItem2 = new NullDataItem();
+		NullDataItem nullDataItem2 = DataItemUtils.buildDataItem(null, DataItemType.NULL);
+		
+		System.out.println(nullDataItem1);
 		System.out.println(nullDataItem1);
 		
 		//数据项类型
@@ -26,7 +29,7 @@ public class testNullDataItem {
 		DataItemType dit2 = nullDataItem1.getType();
 		System.out.println(dit2);
 		
-		NullDataItem nullDataItem3 = (NullDataItem) nullDataItem1.get();
+		NullDataItem nullDataItem3 = nullDataItem1.get();
 		IDataSetDataItem<Object> nullDataItem4 = nullDataItem1.get();
 		Object value1 = nullDataItem1.getValue();
 		if(null == value1){

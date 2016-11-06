@@ -7,60 +7,61 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 	
 	private static final long serialVersionUID = 2918776706117784302L;
 	private double value;
+	private double old;
 
 	
 	public DecimalDataItem(int value) {
 		super();
 		this.value = value;
-		this.setOldValue((double) value);
+		this.old = value;
 	}
 
 	public DecimalDataItem(long value) {
 		super();
 		this.value = value;
-		this.setOldValue((double) value);
+		this.old = value;
 	}
 	
 	public DecimalDataItem(float value) {
 		super();
 		this.value = value;
-		this.setOldValue((double) value);
+		this.old = value;
 	}
 	
 	public DecimalDataItem(double value) {
 		super();
 		this.value = value;
-		this.setOldValue(value);
+		this.old = value;
 	}
 	
 	public DecimalDataItem(Double value) {
 		super();
 		this.value = value.doubleValue();
-		this.setOldValue(value);
+		this.old = value.doubleValue();
 	}
 	
 	public DecimalDataItem(Long value) {
 		super();
 		this.value = value.doubleValue();
-		this.setOldValue(value.doubleValue());
+		this.old = value.longValue();
 	}
 	
 	public DecimalDataItem(Integer value) {
 		super();
 		this.value = value.doubleValue();
-		this.setOldValue(value.doubleValue());
+		this.old = value.intValue();
 	}
 	
 	public DecimalDataItem(Float value) {
 		super();
 		this.value = value.doubleValue();
-		this.setOldValue(value.doubleValue());
+		this.old = value.doubleValue();
 	}
 	
 	public DecimalDataItem(String value){
 		super();
 		this.value = Double.parseDouble(value);
-		this.setOldValue(Double.parseDouble(value));
+		this.old = Double.parseDouble(value);
 	}
 	
 	@Override
@@ -101,10 +102,10 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 		this.value = data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<Double> data) {
 		this.value = data.getValue().doubleValue();
-	}
+	}*/
 
 	public void set(DecimalDataItem data) {
 		this.value = data.doubleValue();
@@ -227,9 +228,24 @@ public class DecimalDataItem extends AbstractDataItem<Double> {
 		return String.valueOf(this.getOldValue());
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		this.setOldValue(Double.parseDouble(oldValue));
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<Double>> void set(D data) {
+		this.value = data.getValue().doubleValue();
+	}
+
+	@Override
+	public Double getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return this.value != this.old;
 	}
 	
 }

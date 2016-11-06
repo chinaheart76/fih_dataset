@@ -19,6 +19,9 @@ public class DataSetImpl implements IDataSet {
 	protected IDataSetDefinition define;
 	protected List<IDataSetRow> rows;
 	private int total =0;
+	private int startRow =0;
+	private int endRow =0;
+	private int pageNo =0;
 	private volatile boolean changed = false;
 
 	/*private DataSetImpl() {
@@ -90,6 +93,21 @@ public class DataSetImpl implements IDataSet {
 	@Override
 	public int getRowCount() {
 		return this.rows.size();
+	}
+	
+	@Override
+	public int getStartRow() {
+		return this.startRow;
+	}
+
+	@Override
+	public int getEndRow() {
+		return this.endRow;
+	}
+
+	@Override
+	public int getPageNo() {
+		return this.pageNo;
 	}
 
 	@Override

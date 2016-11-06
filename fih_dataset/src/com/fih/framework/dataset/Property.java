@@ -2,6 +2,8 @@ package com.fih.framework.dataset;
 
 import java.io.Serializable;
 
+import org.dom4j.Element;
+
 /**
  * 文件名：Propery.java<br>
  * 包名 ：com.fih.framework.dataset<br>

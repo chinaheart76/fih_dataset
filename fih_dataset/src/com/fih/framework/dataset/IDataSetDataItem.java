@@ -52,12 +52,14 @@ public interface IDataSetDataItem<T> extends Serializable,Comparable<IDataSetDat
 	 * 获得数据项接口
 	 * @return
 	 */
-	IDataSetDataItem<T> get();
+	//IDataSetDataItem<T> get();
+	<D extends IDataSetDataItem<T>> D get();
 	/**
 	 * 修改数据项接口
 	 * @param data
 	 */
-	void set(IDataSetDataItem<T> data);
+	//void set(IDataSetDataItem<T> data);
+	<D extends IDataSetDataItem<T>> void set(D data);
 	
 	/**
 	 * 获得数据项的老值
@@ -71,7 +73,7 @@ public interface IDataSetDataItem<T> extends Serializable,Comparable<IDataSetDat
 	 */
 	boolean isDirty();
 	
-	int getState();
+//	int getState();
 	
 	/**
 	 * 数据项值访问
@@ -108,43 +110,43 @@ public interface IDataSetDataItem<T> extends Serializable,Comparable<IDataSetDat
 	 * 设置字符串形式的老值
 	 * @param oldValue
 	 */
-	void setOldValueString(String oldValue);
+	//void setOldValueString(String oldValue);
 	
 	/**
 	 * 数据项是否新增
 	 * @return
 	 */
-	boolean isNew();
+	//boolean isNew();
 
 	/**
 	 * 数据项是否删除
 	 * @return
 	 */
-	boolean isDelete();
+//	boolean isDelete();
 
 	/**
 	 * 数据项是否更新
 	 * @return
 	 */
-	boolean isUpdate();
+//	boolean isUpdate();
 
 	/**
 	 * 数据项是否可以持久保持
 	 * @return
 	 */
-	boolean isPersistenceCapable();
+//	boolean isPersistenceCapable();
 	
 	/**
 	 * 数据项的状态是否脏
 	 * @return
 	 */
 //	boolean isStateDirty();
-	void setReadyOnly(boolean isReadyOnly);
-	boolean isReadyOnly();
-	void setPrimaryKey(boolean isPrimaryKey);
-	boolean isPrimaryKey();
-	void setDBINIT(boolean isDBINIT);
-	boolean isDBINIT();
+//	void setReadyOnly(boolean isReadyOnly);
+//	boolean isReadyOnly();
+//	void setPrimaryKey(boolean isPrimaryKey);
+//	boolean isPrimaryKey();
+//	void setDBINIT(boolean isDBINIT);
+//	boolean isDBINIT();
 
 }
 

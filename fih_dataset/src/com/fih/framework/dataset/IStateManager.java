@@ -16,6 +16,6 @@ public interface IStateManager extends Serializable {
 	
 	void rollbackState();
 	
-	void makeState();
+//	void makeState();
 	
 }

@@ -7,36 +7,36 @@ public class IntegerDataItem extends AbstractDataItem<Integer> {
 	
 	private static final long serialVersionUID = 2918776706117784302L;
 	private int value;
-
+	private int old;
 	
 	public IntegerDataItem(int value) {
 		super();
 		this.value = value;
-		this.setOldValue(value);
+		this.old = value;
 	}
 
 	public IntegerDataItem(long value) {
 		super();
 		this.value = (int) value;
-		this.setOldValue((int) value);
+		this.old = (int) value;
 	}
 	
 	public IntegerDataItem(Integer value) {
 		super();
 		this.value = value.intValue();
-		this.setOldValue(value);
+		this.old = value.intValue();
 	}
 	
 	public IntegerDataItem(Long value) {
 		super();
 		this.value = value.intValue();
-		this.setOldValue(value.intValue());
+		this.old = value.intValue();
 	}
 	
 	public IntegerDataItem(String value){
 		super();
 		this.value = Integer.parseInt(value);
-		this.setOldValue(Integer.parseInt(value));
+		this.old = Integer.parseInt(value);
 	}
 	
 	@Override
@@ -61,10 +61,10 @@ public class IntegerDataItem extends AbstractDataItem<Integer> {
 		this.value = (int) data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<Integer> data) {
 		this.value = data.getValue().intValue();
-	}
+	}*/
 
 	public void set(IntegerDataItem data) {
 		this.value = data.intValue();
@@ -180,17 +180,32 @@ public class IntegerDataItem extends AbstractDataItem<Integer> {
 
 	@Override
 	public void setValueString(String value) {
-		this.setOldValue(Integer.parseInt(value));
+		this.value = Integer.parseInt(value);
 	}
 
 	@Override
 	public String getOldValueString() {
-		return String.valueOf(this.value);
+		return String.valueOf(this.old);
+	}
+
+	/*@Override
+	public void setOldValueString(String oldValue) {
+		this.old = Integer.parseInt(oldValue);
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<Integer>> void set(D data) {
+		this.value = data.getValue().intValue();
 	}
 
 	@Override
-	public void setOldValueString(String oldValue) {
-		this.setOldValue(Integer.parseInt(oldValue));
+	public Integer getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return this.value != this.old;
 	}
 
 }

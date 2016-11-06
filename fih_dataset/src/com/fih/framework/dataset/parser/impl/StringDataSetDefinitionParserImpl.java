@@ -3,7 +3,7 @@ package com.fih.framework.dataset.parser.impl;
 import com.fih.framework.dataset.IDataSetDefinition;
 import com.fih.framework.dataset.parser.IDataSetDefinitionParser;
 
-public class DataSetDefinitionParserImpl implements IDataSetDefinitionParser {
+public class StringDataSetDefinitionParserImpl implements IDataSetDefinitionParser<String> {
 
 	@Override
 	public String marshal(IDataSetDefinition dataSetDefine) {

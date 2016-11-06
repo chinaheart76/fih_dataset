@@ -7,11 +7,12 @@ public class StringDataItem extends AbstractDataItem<String> {
 
 	private static final long serialVersionUID = -8927538627640629350L;
 	private String value;
+	private String old;
 	
 	public StringDataItem(String value) {
 		super();
 		this.value = value;
-		this.setOldValue(value);
+		this.old = value;
 	}
 
 	@Override
@@ -29,10 +30,10 @@ public class StringDataItem extends AbstractDataItem<String> {
 		this.value = data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<String> data) {
 		this.value = data.getValue();
-	}
+	}*/
 
 	public void set(StringDataItem data) {
 		this.value = data.getValue();
@@ -89,9 +90,24 @@ public class StringDataItem extends AbstractDataItem<String> {
 		return this.getOldValue();
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
-		this.setOldValue(oldValue);
+		this.old = oldValue;
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<String>> void set(D data) {
+		this.value = data.getValue();
+	}
+
+	@Override
+	public String getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return this.value.equals(old);
 	}
 
 }

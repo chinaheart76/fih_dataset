@@ -36,10 +36,10 @@ public class NullDataItem extends AbstractDataItem<Object> {
 
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<Object> data) {
 
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
@@ -75,9 +75,31 @@ public class NullDataItem extends AbstractDataItem<Object> {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<Object>> D get() {
+		return (D) a;
 	}
+
+	@Override
+	public <D extends IDataSetDataItem<Object>> void set(D data) {
+		
+	}
+
+	@Override
+	public Object getOldValue() {
+		return null;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return false;
+	}
+	
+	
 
 }

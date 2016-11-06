@@ -1,15 +1,33 @@
 package com.fih.framework.dataset.impl.dataset;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringBufferInputStream;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.dom4j.DocumentFactory;
+import org.dom4j.Element;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fih.framework.dataset.IPropertySet;
 import com.fih.framework.dataset.Property;
 
-public class PropertySet implements IPropertySet {
+public abstract class PropertySet implements IPropertySet {
+	
+	protected static final JsonFactory jsonFactory = new JsonFactory();
 
 	private static final long serialVersionUID = -4984486545377618050L;
 	protected Map<String,Property> properties = new HashMap<String,Property>();
@@ -28,7 +46,10 @@ public class PropertySet implements IPropertySet {
 
 	@Override
 	public Property getProperty(String propertyName) {
-		return this.properties.get(propertyName);
+		Property  property = this.properties.get(propertyName);
+		property.setName(propertyName);
+		
+		return property;
 	}
 
 	@Override
@@ -88,5 +109,84 @@ public class PropertySet implements IPropertySet {
 		
 		return oldValue;
 	}
+	
+	@Override
+	public Element toXml() {
+		Element el = DocumentFactory.getInstance().createElement("properties");		
+		for(Entry<String, Property> property:properties.entrySet()){
+			if("name".equals(property.getKey())){
+				el.addAttribute("name", property.getValue() == null?"":property.getValue().getValue());
+			}else{
+				el.add(this.properityToXml(property.getKey(), property.getValue()));
+			}
+		}
+		return el;
+	}
 
+	@Override
+	public String toJson() {
+		ObjectMapper om = new ObjectMapper();
+		
+		Writer stringWriter = new StringWriter();
+		
+		try {
+			JsonGenerator jsonGen = jsonFactory.createGenerator(stringWriter);
+			
+			jsonGen.writeStartObject();
+					
+			String propertiesString = om.writeValueAsString(this.properties);
+			jsonGen.writeStringField("properties", propertiesString);
+					
+			jsonGen.writeEndObject();
+			
+			jsonGen.close();
+			stringWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+				
+		return stringWriter.toString();
+	}
+	
+	Element properityToXml(String name ,String value){
+		
+		Element el = DocumentFactory.getInstance().createElement("property");
+		el.addAttribute("name",name);
+		el.addAttribute("value",value);
+		return el;
+	}
+	
+	Element properityToXml(String name ,Property property){
+		
+		Element el = DocumentFactory.getInstance().createElement("property");
+		el.addAttribute("name",name);
+		el.addAttribute("value",property.getValue() == null?"":property.getValue());
+		return el;
+	}
+
+	@Override
+	public void fromXml(Element element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String toXmlString() {
+		return toXml().asXML();
+	}
+
+	@Override
+	public void fromXml(String xmlString) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fromJson(String json) throws JsonParseException, IOException {
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(json.getBytes());
+		JsonParser jsonP = jsonFactory.createParser(inputStream);
+//		jsonP.
+	}
+	
 }

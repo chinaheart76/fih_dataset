@@ -11,11 +11,11 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	
 	private static final long serialVersionUID = 3885597360692560530L;
 	
-	private T oldValue;
+//	private T oldValue;
 //	private IStateManager _stateManager = new StateManager(this);
-	private boolean isPrimaryKey = false;
-	private boolean isReadyOnly = false;
-	private boolean isDBINIT = false;
+//	private boolean isPrimaryKey = false;
+//	private boolean isReadyOnly = false;
+//	private boolean isDBINIT = false;
 //	private boolean isDirty = false;
 	
 	@Override
@@ -23,9 +23,14 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 		return this.getType();
 	}
 	
-	@Override
+	/*@Override
 	public IDataSetDataItem<T> get() {
 		return this;
+	}*/
+	
+	@Override
+	public <D extends IDataSetDataItem<T>> D get() {
+		return (D) this;
 	}
 	
 	public int compareTo(NullDataItem o) {
@@ -42,7 +47,7 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 		visitor.visit(this);
 	}
 	
-	@Override
+	/*@Override
 	public T getOldValue(){
 		return this.oldValue;
 	}
@@ -56,7 +61,7 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	public boolean isDirty(){
 		return !this.get().equals(this.oldValue);
 //		return isDirty;
-	}
+	}*/
 	
 //	protected void setDirty(boolean b){
 //		this.isDirty = b;
@@ -67,7 +72,7 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 //		return this._stateManager.isDirty();
 //	}
 
-	@Override
+	/*@Override
 	public int getState() {
 //		return this._stateManager.getState();
 		return 0;
@@ -128,6 +133,6 @@ public abstract class AbstractDataItem<T> implements IDataSetDataItem<T> {
 	@Override
 	public void setDBINIT(boolean isDBINIT) {
 		this.isDBINIT = isDBINIT;
-	}
+	}*/
 
 }

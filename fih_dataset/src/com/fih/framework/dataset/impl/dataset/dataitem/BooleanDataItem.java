@@ -9,17 +9,18 @@ public class BooleanDataItem extends AbstractDataItem<Boolean> {
 
 	private static final long serialVersionUID = -5501717206593326570L;
 	private boolean value;
+	private boolean old;
 
 	public BooleanDataItem(boolean value) {
 		super();
 		this.value = value;
-		this.setOldValue(value);
+		this.old = value;
 	}
 	
 	public BooleanDataItem(String value){
 		super();
 		this.value = Boolean.parseBoolean(value);
-		this.setOldValue(Boolean.parseBoolean(value));
+		this.old = Boolean.parseBoolean(value);
 	}
 
 	@Override
@@ -41,10 +42,10 @@ public class BooleanDataItem extends AbstractDataItem<Boolean> {
 		this.value = data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<Boolean> data) {
 		this.value = data.getValue();
-	}
+	}*/
 
 	public void set(boolean data) {
 		this.value = data;
@@ -105,9 +106,24 @@ public class BooleanDataItem extends AbstractDataItem<Boolean> {
 		return String.valueOf(this.getOldValue());
 	}
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		this.setOldValue(Boolean.parseBoolean(oldValue));
+	}*/
+
+	@Override
+	public <D extends IDataSetDataItem<Boolean>> void set(D data) {
+		this.value = data.getValue();
+	}
+
+	@Override
+	public Boolean getOldValue() {
+		return this.old;
+	}
+
+	@Override
+	public boolean isDirty() {
+		return this.value != this.old;
 	}
 
 }

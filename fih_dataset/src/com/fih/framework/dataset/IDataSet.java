@@ -37,6 +37,10 @@ public interface IDataSet extends Serializable,Iterable<IDataSetRow> {
 	 */
 	int getRowCount();
 	
+	int getStartRow();
+	int getEndRow();
+	int getPageNo();
+	
 	/**
 	 * 数据集特定数据列
 	 * @param col

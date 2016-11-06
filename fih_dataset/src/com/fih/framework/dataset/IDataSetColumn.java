@@ -15,6 +15,8 @@ import java.util.List;
 
 public interface IDataSetColumn extends Serializable,Iterable<IDataSetDataItem> {
 	
+	int getColumnId();
+	
 	/**
 	 * 获得第几行数据项
 	 * @param row

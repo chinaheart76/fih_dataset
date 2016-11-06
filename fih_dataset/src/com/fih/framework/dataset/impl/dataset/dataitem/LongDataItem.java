@@ -7,6 +7,7 @@ public class LongDataItem extends AbstractDataItem<Long> {
 	
 	private static final long serialVersionUID = 4649366698060555378L;
 	private long value;
+	private long old;
 
 	@Override
 	public DataItemType getType() {
@@ -17,31 +18,31 @@ public class LongDataItem extends AbstractDataItem<Long> {
 	public LongDataItem(long value) {
 		super();
 		this.value = value;
-		this.setOldValue(value);
+		this.old = value;
 	}
 
 	public LongDataItem(int value) {
 		super();
 		this.value = value;
-		this.setOldValue((long) value);
+		this.old = value;
 	}
 
 	public LongDataItem(Long value) {
 		super();
 		this.value = value.longValue();
-		this.setOldValue(value);
+		this.old = value.longValue();
 	}
 
 	public LongDataItem(Integer value) {
 		super();
 		this.value = value.longValue();
-		this.setOldValue(value.longValue());
+		this.old = value.longValue();
 	}
 	
 	public LongDataItem(String value){
 		super();
 		this.value = Long.parseLong(value);
-		this.setOldValue(Long.parseLong(value));
+		this.old = Long.parseLong(value);
 	}
 
 	@Override
@@ -61,10 +62,10 @@ public class LongDataItem extends AbstractDataItem<Long> {
 		this.value = (long) data;
 	}
 
-	@Override
+	/*@Override
 	public void set(IDataSetDataItem<Long> data) {
 		this.value = data.getValue().longValue();
-	}
+	}*/
 
 	public void set(LongDataItem data) {
 		this.value = data.longValue();
@@ -193,8 +194,25 @@ public class LongDataItem extends AbstractDataItem<Long> {
 	}
 
 
-	@Override
+	/*@Override
 	public void setOldValueString(String oldValue) {
 		this.setOldValue(Long.parseLong(oldValue));
+	}*/
+
+
+	@Override
+	public <D extends IDataSetDataItem<Long>> void set(D data) {
+		this.value = data.getValue().longValue();
+	}
+
+	@Override
+	public Long getOldValue() {
+		return this.old;
+	}
+
+
+	@Override
+	public boolean isDirty() {
+		return this.value != this.old;
 	}
 }

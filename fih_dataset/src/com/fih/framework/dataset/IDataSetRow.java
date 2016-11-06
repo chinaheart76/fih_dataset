@@ -25,7 +25,7 @@ import java.util.List;
  */
 public interface IDataSetRow extends Serializable,Iterable<IDataSetDataItem> {
 	
-	long getId();
+	long getRowId();
 	
 	/**
 	 * 获得数据行中的一个数据项

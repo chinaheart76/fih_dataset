@@ -1,10 +1,14 @@
 package com.fih.framework.dataset.impl.dataset;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.dom4j.Element;
+
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fih.framework.dataset.IDataSetAction;
 import com.fih.framework.dataset.IDataSetColumnDefinition;
 import com.fih.framework.dataset.IDataSetDefinition;
@@ -131,5 +135,29 @@ public class DataSetDefinitionImpl extends PropertySet implements IDataSetDefini
 	public String toString() {
 		return this.getName() + ':' + this.properties.toString() + "\nColumns:" + this.columns.toString() + "\nActions:" + this.actions.toString();
 	}
+	
+	@Override
+	public Element toXml(){
+		return null;
+	}
+	
+	@Override
+	public String toJson(){
+		return null;
+	}
+
+	@Override
+	public void fromXml(Element element) {
+		// TODO Auto-generated method stub
+		super.fromXml(element);
+	}
+
+	@Override
+	public void fromJson(String json) throws JsonParseException, IOException {
+		// TODO Auto-generated method stub
+		super.fromJson(json);
+	}
+	
+	
 
 }

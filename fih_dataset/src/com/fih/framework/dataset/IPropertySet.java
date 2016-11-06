@@ -1,7 +1,12 @@
 package com.fih.framework.dataset;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+
+import org.dom4j.Element;
+
+import com.fasterxml.jackson.core.JsonParseException;
 
 /**
  * 文件名：IPropertySet.java<br>
@@ -38,5 +43,16 @@ public interface IPropertySet extends Serializable {
 	void clear();
 
 	List<Property> getProperties();
+	
+	Element toXml();
+	String toXmlString();
+	
+	void fromXml(Element element);
+	void fromXml(String xmlString);
+	
+	String toJson();
+	
+	void fromJson(String json) throws JsonParseException, IOException;
+	
 }
 

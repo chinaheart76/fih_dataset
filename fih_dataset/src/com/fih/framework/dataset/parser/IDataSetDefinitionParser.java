@@ -2,10 +2,10 @@ package com.fih.framework.dataset.parser;
 
 import com.fih.framework.dataset.IDataSetDefinition;
 
-public interface IDataSetDefinitionParser {
+public interface IDataSetDefinitionParser<T> extends IParser<T,IDataSetDefinition> {
 	
-	String marshal(IDataSetDefinition dataSetDefine);
+	/*T marshal(IDataSetDefinition dataSetDefine);
 	
-	IDataSetDefinition unmarshal(String defineString);
+	IDataSetDefinition unmarshal(T defineString);*/
 
 }
