@@ -4,11 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringBufferInputStream;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,9 +23,11 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fih.framework.dataset.IPropertySet;
 import com.fih.framework.dataset.Property;
+import com.fih.framework.dataset.utils.XmlUtils;
 
 public abstract class PropertySet implements IPropertySet {
 	
@@ -167,7 +171,20 @@ public abstract class PropertySet implements IPropertySet {
 
 	@Override
 	public void fromXml(Element element) {
-		// TODO Auto-generated method stub
+		
+		String name = element.attributeValue("name");
+		this.properties.put("name", new Property("name",name));
+		
+		List list = element.elements();
+		Iterator iterator = list.iterator();
+		while(iterator.hasNext()){
+			Element el = (Element)iterator.next();
+			
+			if(el.getName().equals("property")){
+				this.properties.put(el.attributeValue("name"), new Property(el.attributeValue("name"),el.attributeValue("value")));
+			}
+			
+		}
 		
 	}
 
@@ -178,15 +195,33 @@ public abstract class PropertySet implements IPropertySet {
 
 	@Override
 	public void fromXml(String xmlString) {
-		// TODO Auto-generated method stub
+		
+		Element el = XmlUtils.createXmlElementFromString(new StringBuffer(xmlString));
+		
+		fromXml(el);
 		
 	}
 
 	@Override
 	public void fromJson(String json) throws JsonParseException, IOException {
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(json.getBytes());
-		JsonParser jsonP = jsonFactory.createParser(inputStream);
-//		jsonP.
+		ObjectMapper om = new ObjectMapper();
+		
+		StringReader reader = new StringReader(json);
+		
+		JsonParser jsonP = jsonFactory.createParser(reader);
+		
+		while(jsonP.nextToken() != JsonToken.END_OBJECT){
+			String fieldName = jsonP.getCurrentName();
+			if(null == fieldName){
+				continue;
+			}
+			
+			if(fieldName.equals("properties")){
+				String properties = jsonP.nextTextValue();
+				this.properties = om.readValue(properties, HashMap.class);
+			}
+		
+		}
 	}
 	
 }

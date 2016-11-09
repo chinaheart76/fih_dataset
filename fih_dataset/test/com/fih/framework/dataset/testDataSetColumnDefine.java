@@ -49,7 +49,15 @@ public class testDataSetColumnDefine {
 		colDef.fromXml("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+xml);
 		
 		System.out.println(colDef.toXml().asXML());
-
+		
+		colDef.clear();
+		
+		colDef.fromJson(json);
+		
+		json = colDef.toJson();
+		
+		System.out.println(json);
+		
 	}
 
 }

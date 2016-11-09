@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fih.framework.dataset.IDataSetColumnDefinition;
 import com.fih.framework.dataset.Property;
@@ -153,11 +154,6 @@ public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSet
 		
 		return el;
 	}
-	
-	@Override
-	public String toXmlString() {		
-		return toXml().asXML();
-	}
 
 	@Override
 	public String toJson() {
@@ -190,7 +186,6 @@ public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSet
 
 	@Override
 	public void fromXml(Element element) {
-//		super.fromXml(element);
 
 		String name = element.attributeValue("name");
 		this.properties.put("name", new Property("name",name));
@@ -199,7 +194,6 @@ public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSet
 		Iterator iterator = list.iterator();
 		while(iterator.hasNext()){
 			Element el = (Element)iterator.next();
-			System.out.println(el.asXML());
 			
 			if(el.getName().equals("property")){
 				this.properties.put(el.attributeValue("name"), new Property(el.attributeValue("name"),el.attributeValue("value")));
@@ -220,12 +214,12 @@ public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSet
 		
 	}
 	
-	@Override
+	/*@Override
 	public void fromXml(String xmlString) {
 		Element el = XmlUtils.createXmlElementFromString(new StringBuffer(xmlString));
 		
 		fromXml(el);
-	}
+	}*/
 
 	@Override
 	public void fromJson(String json) throws JsonParseException, IOException {
@@ -235,9 +229,31 @@ public class DataSetColumnDefinitionImpl extends PropertySet implements IDataSet
 		
 		JsonParser jsonP = jsonFactory.createParser(reader);
 		
+		while(jsonP.nextToken() != JsonToken.END_OBJECT){
+			String fieldName = jsonP.getCurrentName();
+			if(null == fieldName){
+				continue;
+			}
+			
+			if(fieldName.equals("properties")){
+				String properties = jsonP.nextTextValue();
+				this.properties = om.readValue(properties, HashMap.class);
+			}
+			
+			if(fieldName.equals("codelist")){
+				String codelists = jsonP.nextTextValue();
+				Map codeList = om.readValue(codelists, HashMap.class);
+				this.codeList.putAll(codeList);
+			}
 		
+		}
 		
-		super.fromJson(json);
+	}
+
+	@Override
+	public void clear() {
+		this.codeList.clear();
+		super.clear();
 	}
 	
 	

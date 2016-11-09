@@ -25,6 +25,10 @@ public class DataSetFactory {
 		return null;
 	}
 	
+	public IDataSet createDataSetFromXml(String xml){
+		return null;
+	}
+	
 	public IDataSet createDataSetFromJson(String json){
 		return null;
 	}
@@ -45,13 +49,13 @@ public class DataSetFactory {
 		return null;
 	}
 	
-public String exprotJsaon(IDataSet dataset){
+	public String exprotJsaon(IDataSet dataset){
 		return null;
 	}
 
-public String exprotXml(IDataSet dataset){
-	return null;
-}
+	public String exprotXml(IDataSet dataset){
+		return null;
+	}
 	
 	
 }

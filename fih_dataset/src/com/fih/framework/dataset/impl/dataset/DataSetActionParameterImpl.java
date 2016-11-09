@@ -6,6 +6,7 @@ import com.fih.framework.dataset.Property;
 public class DataSetActionParameterImpl extends PropertySet implements IDataSetActionParameter {
 
 	private static final long serialVersionUID = 3465524141511244570L;
+	private static final String [] reservedWords = {"name","value","caption"};
 	
 	public DataSetActionParameterImpl(String name){
 		this.properties.put("name", new Property(String.valueOf(name.hashCode()),name));
@@ -29,6 +30,17 @@ public class DataSetActionParameterImpl extends PropertySet implements IDataSetA
 	@Override
 	public String getCaption() {
 		return this.properties.get("caption").getValue();
+	}
+	
+	@Override
+	public Property removeProperty(String name) {
+		for(String reservedWord:reservedWords){
+			if(name.equals(reservedWord)){
+				return null;
+			}
+		}
+		
+		return super.removeProperty(name);
 	}
 
 }

@@ -157,7 +157,5 @@ public class DataSetDefinitionImpl extends PropertySet implements IDataSetDefini
 		// TODO Auto-generated method stub
 		super.fromJson(json);
 	}
-	
-	
 
 }
